@@ -2,8 +2,11 @@ package com.webianks.task.playstoreparalleldownload;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -16,30 +19,47 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
     private List<Apps> appsList;
     private Context context;
 
-    public PlayRecyclerAdapter(List<Apps> appsList, Context context) {
+    public PlayRecyclerAdapter(Context context, List<Apps> appsList) {
         this.appsList = appsList;
         this.context = context;
     }
 
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(context).inflate(R.layout.single_app_layout, parent, false);
+        return new VH(view);
     }
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
 
+        holder.appImage.setImageResource(R.mipmap.ic_launcher);
+        holder.appName.setText(appsList.get(position).getAppName());
+        holder.developer.setText(appsList.get(position).getDeveloper());
+        holder.rating.setText(String.valueOf(appsList.get(position).getStars()));
+
     }
 
     @Override
     public int getItemCount() {
-        return appsList.size();
+        return (appsList == null) ? 0 : appsList.size();
     }
 
-    public class VH extends RecyclerView.ViewHolder {
+    class VH extends RecyclerView.ViewHolder {
 
-        public VH(View itemView) {
+        ImageView appImage;
+        TextView appName;
+        TextView developer;
+        TextView rating;
+
+        VH(View itemView) {
             super(itemView);
+
+            appImage = (ImageView) itemView.findViewById(R.id.app_image);
+            appName = (TextView) itemView.findViewById(R.id.app_name);
+            developer = (TextView) itemView.findViewById(R.id.developer);
+            rating = (TextView) itemView.findViewById(R.id.rating);
+
         }
     }
 }

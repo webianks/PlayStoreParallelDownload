@@ -7,6 +7,7 @@ package com.webianks.task.playstoreparalleldownload;
 class Apps {
 
     String appName;
+    String developer;
     int appLogo;
     float stars;
 
@@ -32,5 +33,13 @@ class Apps {
 
     public String getAppName() {
         return appName;
+    }
+
+    public void setDeveloper(String developer) {
+        this.developer = developer;
+    }
+
+    public String getDeveloper() {
+        return developer;
     }
 }
