@@ -16,10 +16,10 @@ import java.util.List;
 
 public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapter.VH> {
 
-    private List<Apps> appsList;
+    private List<App> appsList;
     private Context context;
 
-    public PlayRecyclerAdapter(Context context, List<Apps> appsList) {
+    public PlayRecyclerAdapter(Context context, List<App> appsList) {
         this.appsList = appsList;
         this.context = context;
     }
@@ -33,7 +33,7 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
     @Override
     public void onBindViewHolder(VH holder, int position) {
 
-        holder.appImage.setImageResource(R.mipmap.ic_launcher);
+        holder.appImage.setImageResource(appsList.get(position).getAppLogo());
         holder.appName.setText(appsList.get(position).getAppName());
         holder.developer.setText(appsList.get(position).getDeveloper());
         holder.rating.setText(String.valueOf(appsList.get(position).getStars()));

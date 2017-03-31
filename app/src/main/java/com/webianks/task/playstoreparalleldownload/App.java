@@ -4,7 +4,7 @@ package com.webianks.task.playstoreparalleldownload;
  * Created by R Ankit on 30-03-2017.
  */
 
-class Apps {
+class App {
 
     String appName;
     String developer;

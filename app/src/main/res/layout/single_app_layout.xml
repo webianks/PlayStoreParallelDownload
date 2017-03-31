@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="16dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    app:cardCornerRadius="5dp"
     app:cardBackgroundColor="@color/white">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,8 +18,9 @@
         <ImageView
             android:id="@+id/app_image"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5" />
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:src="@drawable/ic_instagram" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -26,7 +28,7 @@
             android:layout_weight="2"
             android:orientation="vertical"
             android:paddingLeft="8dp"
-            android:paddingTop="16dp">
+            android:paddingTop="25dp">
 
             <TextView
                 android:id="@+id/app_name"
@@ -65,8 +67,9 @@
 
             <ImageView
                 android:id="@+id/download"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/ic_down_arrow"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
                 android:layout_gravity="center" />
 
             <ProgressBar
