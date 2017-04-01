@@ -1,0 +1,72 @@
+{
+  "apps": [
+    {
+      "name":"Instagram",
+      "developer":"Instagram",
+      "download-link":"http://webianks.com",
+      "stars":"4.5"
+      
+    },
+    {
+      "name":"Google Chrome",
+      "developer":"Google Inc.",
+      "download-link":"http://webianks.com",
+      "stars":"4.3"
+    },
+    {
+      "name":"WhatsApp Messenger",
+      "developer":"WhatsApp Inc.",
+      "download-link":"http://webianks.com",
+      "stars":"4.4"
+    },
+    
+    {
+      "name":"Hangouts",
+      "developer":"Google Inc.",
+      "download-link":"http://webianks.com",
+      "stars":"3.9"
+    },
+    
+    {
+      "name":"Facebook",
+      "developer":"Facebook",
+      "download-link":"http://webianks.com",
+      "stars":"4.0"
+    },
+    
+    {
+      "name":"Google+",
+      "developer":"Google Inc.",
+      "download-link":"http://webianks.com",
+      "stars":4.2
+    },
+    
+    {
+      "name":"Google Keep",
+      "developer":"Google Inc.",
+      "download-link":"http://webianks.com",
+      "stars":4.4
+    },
+    
+    {
+      "name":"YouTube",
+      "developer":"Google Inc.",
+      "download-link":"http://webianks.com",
+      "stars":4.2
+    },
+    
+    {
+      "name":"Filmy",
+      "developer":"salroid",
+      "download-link":"http://webianks.com",
+      "stars":4.4
+    },
+    
+    {
+      "name":"Slack",
+      "developer":"Slack Technologies Inc.",
+      "download-link":"http://webianks.com",
+      "stars":4.4
+    }
+  ]
+}

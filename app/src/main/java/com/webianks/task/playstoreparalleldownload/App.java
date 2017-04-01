@@ -6,40 +6,49 @@ package com.webianks.task.playstoreparalleldownload;
 
 class App {
 
-    String appName;
-    String developer;
-    int appLogo;
-    float stars;
+    private String appName;
+    private String developer;
+    private String downloadLink;
+    private int appLogo;
+    private String stars;
 
-    public void setAppLogo(int appLogo) {
+    void setAppLogo(int appLogo) {
         this.appLogo = appLogo;
     }
 
-    public void setAppName(String appName) {
+    void setAppName(String appName) {
         this.appName = appName;
     }
 
-    public void setStars(float stars) {
+    void setStars(String stars) {
         this.stars = stars;
     }
 
-    public float getStars() {
+    String getStars() {
         return stars;
     }
 
-    public int getAppLogo() {
+    int getAppLogo() {
         return appLogo;
     }
 
-    public String getAppName() {
+    String getAppName() {
         return appName;
     }
 
-    public void setDeveloper(String developer) {
+    void setDeveloper(String developer) {
         this.developer = developer;
     }
 
-    public String getDeveloper() {
+    String getDeveloper() {
         return developer;
+    }
+
+    void setDownloadLink(String downloadLink) {
+        this.downloadLink = downloadLink;
+    }
+
+    String getDownloadLink() {
+        return downloadLink;
     }
 }
