@@ -6,12 +6,12 @@
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
-    app:cardCornerRadius="5dp"
+    android:background="@color/grey"
     app:cardBackgroundColor="@color/white">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:orientation="horizontal"
         android:weightSum="5">
 
@@ -20,15 +20,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:src="@drawable/ic_instagram" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="2.5"
             android:orientation="vertical"
-            android:paddingLeft="8dp"
-            android:paddingTop="25dp">
+            android:paddingTop="18dp">
 
             <TextView
                 android:id="@+id/app_name"
@@ -37,7 +38,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/instagram"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 
@@ -63,13 +64,14 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.5">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/download"
                 android:src="@drawable/ic_down_arrow"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
+                android:paddingRight="8dp"
                 android:layout_gravity="center" />
 
             <ProgressBar
