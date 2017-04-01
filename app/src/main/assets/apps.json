@@ -4,6 +4,7 @@
       "name":"Instagram",
       "developer":"Instagram",
       "download-link":"http://webianks.com",
+      "app_icon":"https://lh3.googleusercontent.com/aYbdIM1abwyVSUZLDKoE0CDZGRhlkpsaPOg9tNnBktUQYsXflwknnOn2Ge1Yr7rImGk=w300-rw",
       "stars":"4.5"
       
     },
@@ -11,12 +12,14 @@
       "name":"Google Chrome",
       "developer":"Google Inc.",
       "download-link":"http://webianks.com",
+      "app_icon":"https://lh3.googleusercontent.com/nYhPnY2I-e9rpqnid9u9aAODz4C04OycEGxqHG5vxFnA35OGmLMrrUmhM9eaHKJ7liB-=w300-rw",
       "stars":"4.3"
     },
     {
       "name":"WhatsApp Messenger",
       "developer":"WhatsApp Inc.",
       "download-link":"http://webianks.com",
+      "app_icon":"https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300-rw",
       "stars":"4.4"
     },
     
@@ -24,6 +27,7 @@
       "name":"Hangouts",
       "developer":"Google Inc.",
       "download-link":"http://webianks.com",
+      "app_icon":"https://lh6.ggpht.com/5puZavg4x2pThSTJgos1sARWoARea7tzr_B8AWEwn2lV05RoXo9M8BM2XwcvwG6nIGc=w300-rw",
       "stars":"3.9"
     },
     
@@ -31,6 +35,7 @@
       "name":"Facebook",
       "developer":"Facebook",
       "download-link":"http://webianks.com",
+      "app_icon":"https://lh3.googleusercontent.com/ZZPdzvlpK9r_Df9C3M7j1rNRi7hhHRvPhlklJ3lfi5jk86Jd1s0Y5wcQ1QgbVaAP5Q=w300-rw",
       "stars":"4.0"
     },
     
@@ -38,6 +43,7 @@
       "name":"Google+",
       "developer":"Google Inc.",
       "download-link":"http://webianks.com",
+      "app_icon":"https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w300-rw",
       "stars":4.2
     },
     
@@ -45,6 +51,7 @@
       "name":"Google Keep",
       "developer":"Google Inc.",
       "download-link":"http://webianks.com",
+      "app_icon":"https://lh5.ggpht.com/DY9VpGNRSHoICKJVpIy9dMjgm7TOb3lTveLtsv4got8aqbLGpSS4w5xXiR7VBe-mr_M=w300-rw",
       "stars":4.4
     },
     
@@ -52,6 +59,7 @@
       "name":"YouTube",
       "developer":"Google Inc.",
       "download-link":"http://webianks.com",
+      "app_icon":"https://lh5.ggpht.com/jZ8XCjpCQWWZ5GLhbjRAufsw3JXePHUJVfEvMH3D055ghq0dyiSP3YxfSc_czPhtCLSO=w300-rw",
       "stars":4.2
     },
     
@@ -59,6 +67,7 @@
       "name":"Filmy",
       "developer":"salroid",
       "download-link":"http://webianks.com",
+      "app_icon":"https://lh3.googleusercontent.com/ZsRTpd5O6IH5Rj9PHoeT1EeryLOiLT8f3wo2pp_7Am_MX33542EOQhduOzPzHHo7gyR4=w300-rw",
       "stars":4.4
     },
     
@@ -66,6 +75,7 @@
       "name":"Slack",
       "developer":"Slack Technologies Inc.",
       "download-link":"http://webianks.com",
+      "app_icon":"https://lh3.googleusercontent.com/CzlsZP3xUHeX3HAGdZ2rL9mK6_C-6T1-YWeBeM8nB3ilmfPSBHCFx4-UbQr8MnQms3d9=w300-rw",
       "stars":4.4
     }
   ]

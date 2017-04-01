@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 /**
@@ -33,7 +35,10 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
     @Override
     public void onBindViewHolder(VH holder, int position) {
 
-        holder.appImage.setImageResource(appsList.get(position).getAppLogo());
+        String icon_url = appsList.get(position).getAppIcon();
+
+        Glide.with(context).load(icon_url).into(holder.appImage);
+
         holder.appName.setText(appsList.get(position).getAppName());
         holder.developer.setText(appsList.get(position).getDeveloper());
         holder.rating.setText(String.valueOf(appsList.get(position).getStars()));

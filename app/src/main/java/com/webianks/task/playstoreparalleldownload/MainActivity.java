@@ -48,13 +48,14 @@ public class MainActivity extends AppCompatActivity {
                 String appName = appObject.getString("name");
                 String developer = appObject.getString("developer");
                 String download_link = appObject.getString("download-link");
+                String app_icon = appObject.getString("app_icon");
                 String stars = appObject.getString("stars");
 
                 App app = new App();
-                app.setAppLogo(R.drawable.ic_instagram);
                 app.setAppName(appName);
                 app.setDeveloper(developer);
                 app.setDownloadLink(download_link);
+                app.setAppIcon(app_icon);
                 app.setStars(stars);
 
                 appsList.add(app);

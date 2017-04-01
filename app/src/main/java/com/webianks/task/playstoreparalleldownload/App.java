@@ -9,11 +9,11 @@ class App {
     private String appName;
     private String developer;
     private String downloadLink;
-    private int appLogo;
+    private String appIcon;
     private String stars;
 
-    void setAppLogo(int appLogo) {
-        this.appLogo = appLogo;
+    void setAppIcon(String  appIcon) {
+        this.appIcon = appIcon;
     }
 
     void setAppName(String appName) {
@@ -28,8 +28,8 @@ class App {
         return stars;
     }
 
-    int getAppLogo() {
-        return appLogo;
+    String getAppIcon() {
+        return appIcon;
     }
 
     String getAppName() {
