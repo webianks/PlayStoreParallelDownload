@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
 
     private List<App> appsList;
     private Context context;
+    private OnItemClickListener onItemClickListener;
+
 
     public PlayRecyclerAdapter(Context context, List<App> appsList) {
         this.appsList = appsList;
@@ -45,6 +48,10 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
 
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+
     @Override
     public int getItemCount() {
         return (appsList == null) ? 0 : appsList.size();
@@ -56,6 +63,8 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
         TextView appName;
         TextView developer;
         TextView rating;
+        ImageView download;
+
 
         VH(View itemView) {
             super(itemView);
@@ -65,6 +74,22 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
             developer = (TextView) itemView.findViewById(R.id.developer);
             rating = (TextView) itemView.findViewById(R.id.rating);
 
+            itemView.findViewById(R.id.download).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (onItemClickListener!=null)
+                        onItemClickListener.downloadButtonClicked(appsList.get(getAdapterPosition()).getDownloadLink());
+
+                }
+            });
+
         }
     }
+
+    interface OnItemClickListener{
+
+        void downloadButtonClicked(String url);
+    }
+
 }
