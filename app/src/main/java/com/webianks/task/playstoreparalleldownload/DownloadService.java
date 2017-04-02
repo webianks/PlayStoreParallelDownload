@@ -51,7 +51,7 @@ public class DownloadService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         String url = intent.getStringExtra("url");
-        new DownloadingTask().execute(url);
+        new DownloadingTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
 
         return START_STICKY;
     }
@@ -79,7 +79,7 @@ public class DownloadService extends Service {
         @Override
         protected Void doInBackground(String... urls) {
 
-            Log.d(TAG, "onPreExecute: "+urls[0]);
+            Log.d(TAG, "onPreExecute: " + urls[0]);
 
             try {
                 run(urls[0]);
@@ -104,7 +104,7 @@ public class DownloadService extends Service {
         try {
 
             String root = Environment.getExternalStorageDirectory().toString();
-            System.out.println("Downloading");
+            System.out.println("Downloading: " + url);
             URL urlFormed = new URL(url);
 
             URLConnection conection = urlFormed.openConnection();
@@ -135,7 +135,7 @@ public class DownloadService extends Service {
             //output.flush();
 
             // closing streams
-           //output.close();
+            //output.close();
             input.close();
 
 
