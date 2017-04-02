@@ -3,6 +3,7 @@ package com.webianks.task.playstoreparalleldownload;
 import android.app.Service;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -10,11 +11,17 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
-import okhttp3.Headers;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -33,7 +40,7 @@ import okio.Source;
 
 public class DownloadService extends Service {
 
-    private final OkHttpClient client = new OkHttpClient();
+    private String TAG = DownloadService.class.getSimpleName();
 
     @Override
     public void onCreate() {
@@ -65,11 +72,14 @@ public class DownloadService extends Service {
 
         @Override
         protected void onPreExecute() {
+
             super.onPreExecute();
         }
 
         @Override
         protected Void doInBackground(String... urls) {
+
+            Log.d(TAG, "onPreExecute: "+urls[0]);
 
             try {
                 run(urls[0]);
@@ -82,88 +92,57 @@ public class DownloadService extends Service {
 
         @Override
         protected void onPostExecute(Void result) {
-        }
-    }
-
-    public void run(String url) throws Exception {
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        final ProgressListener progressListener = new ProgressListener() {
-            @Override public void update(long bytesRead, long contentLength, boolean done) {
-                System.out.println(bytesRead);
-                System.out.println(contentLength);
-                System.out.println(done);
-                System.out.format("%d%% done\n", (100 * bytesRead) / contentLength);
-            }
-        };
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addNetworkInterceptor(new Interceptor() {
-                    @Override public Response intercept(Chain chain) throws IOException {
-                        Response originalResponse = chain.proceed(chain.request());
-                        return originalResponse.newBuilder()
-                                .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                                .build();
-                    }
-                })
-                .build();
-
-        try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-            System.out.println(response.body().string());
             stopSelf();
         }
 
     }
 
+    public void run(String url) throws Exception {
 
-    private static class ProgressResponseBody extends ResponseBody {
+        int count;
 
-        private final ResponseBody responseBody;
-        private final ProgressListener progressListener;
-        private BufferedSource bufferedSource;
+        try {
 
-        public ProgressResponseBody(ResponseBody responseBody, ProgressListener progressListener) {
-            this.responseBody = responseBody;
-            this.progressListener = progressListener;
-        }
+            String root = Environment.getExternalStorageDirectory().toString();
+            System.out.println("Downloading");
+            URL urlFormed = new URL(url);
 
-        @Override public MediaType contentType() {
-            return responseBody.contentType();
-        }
+            URLConnection conection = urlFormed.openConnection();
+            conection.connect();
 
-        @Override public long contentLength() {
-            return responseBody.contentLength();
-        }
+            // getting file length
+            int lenghtOfFile = conection.getContentLength();
 
-        @Override public BufferedSource source() {
-            if (bufferedSource == null) {
-                bufferedSource = Okio.buffer(source(responseBody.source()));
+            // input stream to read file - with 8k buffer
+            InputStream input = new BufferedInputStream(urlFormed.openStream(), 8192);
+
+            // Output stream to write file
+
+            //OutputStream output = new FileOutputStream(root+"temp.apk");
+            byte data[] = new byte[1024];
+
+            long total = 0;
+            while ((count = input.read(data)) != -1) {
+                total += count;
+
+                // writing data to file
+                //output.write(data, 0, count);
+                System.out.format("%d%% done\n", (100 * total) / lenghtOfFile);
+
             }
-            return bufferedSource;
-        }
 
-        private Source source(Source source) {
-            return new ForwardingSource(source) {
-                long totalBytesRead = 0L;
+            // flushing output
+            //output.flush();
 
-                @Override public long read(Buffer sink, long byteCount) throws IOException {
-                    long bytesRead = super.read(sink, byteCount);
-                    // read() returns the number of bytes read, or -1 if this source is exhausted.
-                    totalBytesRead += bytesRead != -1 ? bytesRead : 0;
-                    progressListener.update(totalBytesRead, responseBody.contentLength(), bytesRead == -1);
-                    return bytesRead;
-                }
-            };
+            // closing streams
+           //output.close();
+            input.close();
+
+
+        } catch (Exception e) {
+            Log.e("Error: ", e.getMessage());
         }
     }
 
-    interface ProgressListener {
-        void update(long bytesRead, long contentLength, boolean done);
-    }
 
 }
