@@ -95,10 +95,11 @@ public class MainActivity extends AppCompatActivity implements PlayRecyclerAdapt
 
 
     @Override
-    public void downloadButtonClicked(String url) {
+    public void downloadButtonClicked(int position, String url) {
 
         Intent intent = new Intent(this, DownloadService.class);
-        intent.putExtra("url",url);
+        intent.putExtra("url", url);
+        intent.putExtra("position",position);
         startService(intent);
 
     }

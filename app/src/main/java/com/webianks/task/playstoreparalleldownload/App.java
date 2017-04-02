@@ -12,6 +12,7 @@ class App {
     private String appIcon;
     private String stars;
     boolean downloading;
+    long progress;
 
     void setAppIcon(String  appIcon) {
         this.appIcon = appIcon;
@@ -53,11 +54,19 @@ class App {
         return downloadLink;
     }
 
-    public void setDownloading(boolean downloading) {
+    void setDownloading(boolean downloading) {
         this.downloading = downloading;
     }
 
-    public boolean isDownloading() {
+    boolean isDownloading() {
         return downloading;
+    }
+
+    void setProgress(long progress) {
+        this.progress = progress;
+    }
+
+    long getProgress() {
+        return progress;
     }
 }

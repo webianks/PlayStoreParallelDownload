@@ -5,9 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,7 +24,7 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
     private OnItemClickListener onItemClickListener;
 
 
-    public PlayRecyclerAdapter(Context context, List<App> appsList) {
+    PlayRecyclerAdapter(Context context, List<App> appsList) {
         this.appsList = appsList;
         this.context = context;
     }
@@ -48,6 +46,8 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
         holder.developer.setText(appsList.get(position).getDeveloper());
         holder.rating.setText(String.valueOf(appsList.get(position).getStars()));
 
+        holder.progressBar.setProgress(appsList.get(position).getProgress());
+
         if (appsList.get(position).isDownloading()) {
             holder.download.setVisibility(View.GONE);
             holder.progressBar.setVisibility(View.VISIBLE);
@@ -59,7 +59,7 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
 
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+    void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -77,7 +77,6 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
         TextView rating;
         DonutProgress progressBar;
 
-
         VH(View itemView) {
             super(itemView);
 
@@ -93,7 +92,8 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
                 public void onClick(View view) {
 
                     if (onItemClickListener != null) {
-                        onItemClickListener.downloadButtonClicked(appsList.get(getAdapterPosition()).getDownloadLink());
+                        onItemClickListener.downloadButtonClicked(getAdapterPosition(),
+                                appsList.get(getAdapterPosition()).getDownloadLink());
                         appsList.get(getAdapterPosition()).setDownloading(true);
                         progressBar.setVisibility(View.VISIBLE);
                         progressBar.setProgress(0f);
@@ -107,8 +107,7 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
     }
 
     interface OnItemClickListener {
-
-        void downloadButtonClicked(String url);
+        void downloadButtonClicked(int position, String url);
     }
 
 }
