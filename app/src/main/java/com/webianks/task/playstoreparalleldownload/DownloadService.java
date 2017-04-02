@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class DownloadService extends Service {
 
         String url = " ";
         int position = -1;
+
         if (intent != null) {
             url = intent.getStringExtra("url");
             position = intent.getIntExtra("position", -1);
@@ -69,6 +71,7 @@ public class DownloadService extends Service {
 
             Log.d(TAG, "doInBackground: " + urls[0]);
             String url = urls[0];
+            int position = Integer.valueOf(urls[1]);
 
             int count;
 
@@ -104,9 +107,9 @@ public class DownloadService extends Service {
 
                     if (download_percentage_old != download_percentage_new) {
                         download_percentage_old = download_percentage_new;
-                        publishProgress(download_percentage_old);
+                        Long values[] = new Long[]{download_percentage_old, Long.valueOf(position)};
+                        publishProgress(values);
                     }
-
 
                 }
 
@@ -129,7 +132,10 @@ public class DownloadService extends Service {
         protected void onProgressUpdate(Long... values) {
             super.onProgressUpdate(values);
 
-            System.out.format("%d%% done\n", values[0]);
+            Intent intent = new Intent("download_progress");
+            intent.putExtra("percentage", values[0]);
+            intent.putExtra("position", values[1]);
+            LocalBroadcastManager.getInstance(DownloadService.this).sendBroadcast(intent);
 
         }
 
@@ -138,7 +144,6 @@ public class DownloadService extends Service {
             Log.d(TAG, "onPostExecute");
             stopSelf();
         }
-
     }
 
 

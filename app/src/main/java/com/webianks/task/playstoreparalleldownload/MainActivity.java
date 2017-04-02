@@ -1,6 +1,11 @@
 package com.webianks.task.playstoreparalleldownload;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Handler;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +23,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements PlayRecyclerAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
+    private PlayRecyclerAdapter playRecyclerAdapter;
+    private List<App> appsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,14 @@ public class MainActivity extends AppCompatActivity implements PlayRecyclerAdapt
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                progressReceiver, new IntentFilter("download_progress"));
+    }
 
     private void parseJson(String jsonObject) {
 
@@ -70,8 +85,10 @@ public class MainActivity extends AppCompatActivity implements PlayRecyclerAdapt
 
     }
 
-    private void setAdapter(List<App> appsList) {
-        PlayRecyclerAdapter playRecyclerAdapter = new PlayRecyclerAdapter(this, appsList);
+    private void setAdapter(List<App> appsListNew) {
+
+        this.appsList = appsListNew;
+        playRecyclerAdapter = new PlayRecyclerAdapter(this, appsList);
         playRecyclerAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(playRecyclerAdapter);
     }
@@ -99,10 +116,32 @@ public class MainActivity extends AppCompatActivity implements PlayRecyclerAdapt
 
         Intent intent = new Intent(this, DownloadService.class);
         intent.putExtra("url", url);
-        intent.putExtra("position",position);
+        intent.putExtra("position", position);
         startService(intent);
 
     }
 
+    private BroadcastReceiver progressReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
 
+            long percentage = intent.getLongExtra("percentage", 0);
+            final long position = intent.getLongExtra("position", -1);
+
+            //System.out.format("%d%% done of element position %d\n", percentage, position);
+
+            if (appsList != null && appsList.size() > 0) {
+
+                appsList.get((int) position).setProgress(percentage);
+                playRecyclerAdapter.notifyItemChanged((int) position);
+            }
+
+        }
+    };
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(progressReceiver);
+    }
 }

@@ -7,7 +7,6 @@
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
-    android:background="@color/grey"
     app:cardBackgroundColor="@color/white">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -81,12 +80,12 @@
                 android:id="@+id/download_progress"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:visibility="gone"
                 android:layout_gravity="center"
-                app:donut_finished_stroke_width="5dp"
-                app:donut_unfinished_stroke_width="2dp"
+                android:visibility="gone"
                 app:donut_finished_color="?attr/colorAccent"
+                app:donut_finished_stroke_width="5dp"
                 app:donut_show_text="false"
+                app:donut_unfinished_stroke_width="2dp"
                 custom:donut_progress="0" />
 
         </FrameLayout>
