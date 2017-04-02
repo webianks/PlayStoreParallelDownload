@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements PlayRecyclerAdapt
     public void downloadButtonClicked(String url) {
 
         Intent intent = new Intent(this, DownloadService.class);
+        intent.putExtra("url",url);
         startService(intent);
 
     }
