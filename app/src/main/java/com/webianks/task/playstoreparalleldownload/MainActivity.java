@@ -144,6 +144,6 @@ public class MainActivity extends AppCompatActivity implements PlayRecyclerAdapt
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(progressReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(progressReceiver);
     }
 }
