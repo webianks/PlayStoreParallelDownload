@@ -11,6 +11,7 @@ class App {
     private String downloadLink;
     private String appIcon;
     private String stars;
+    boolean downloading;
 
     void setAppIcon(String  appIcon) {
         this.appIcon = appIcon;
@@ -50,5 +51,13 @@ class App {
 
     String getDownloadLink() {
         return downloadLink;
+    }
+
+    public void setDownloading(boolean downloading) {
+        this.downloading = downloading;
+    }
+
+    public boolean isDownloading() {
+        return downloading;
     }
 }

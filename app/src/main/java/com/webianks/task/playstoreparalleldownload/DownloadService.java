@@ -4,35 +4,15 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
-import android.os.Process;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-
-import okhttp3.Interceptor;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okio.Buffer;
-import okio.BufferedSource;
-import okio.ForwardingSource;
-import okio.Okio;
-import okio.Source;
 
 /**
  * Created by R Ankit on 02-04-2017.
@@ -50,7 +30,10 @@ public class DownloadService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        String url = intent.getStringExtra("url");
+        String url = " ";
+        if (intent != null)
+            url = intent.getStringExtra("url");
+
         new DownloadingTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
 
         return START_STICKY;
@@ -92,6 +75,7 @@ public class DownloadService extends Service {
 
         @Override
         protected void onPostExecute(Void result) {
+            Log.d(TAG, "onPostExecute");
             stopSelf();
         }
 

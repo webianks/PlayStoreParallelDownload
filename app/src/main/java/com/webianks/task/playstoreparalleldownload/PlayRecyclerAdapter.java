@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.lzyzsd.circleprogress.DonutProgress;
 
 import java.util.List;
 
@@ -46,9 +48,18 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
         holder.developer.setText(appsList.get(position).getDeveloper());
         holder.rating.setText(String.valueOf(appsList.get(position).getStars()));
 
+        if (appsList.get(position).isDownloading()) {
+            holder.download.setVisibility(View.GONE);
+            holder.progressBar.setVisibility(View.VISIBLE);
+        } else {
+            holder.download.setVisibility(View.VISIBLE);
+            holder.progressBar.setVisibility(View.GONE);
+        }
+
+
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -60,10 +71,11 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
     class VH extends RecyclerView.ViewHolder {
 
         ImageView appImage;
+        ImageView download;
         TextView appName;
         TextView developer;
         TextView rating;
-        ImageView download;
+        DonutProgress progressBar;
 
 
         VH(View itemView) {
@@ -73,13 +85,20 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
             appName = (TextView) itemView.findViewById(R.id.app_name);
             developer = (TextView) itemView.findViewById(R.id.developer);
             rating = (TextView) itemView.findViewById(R.id.rating);
+            progressBar = (DonutProgress) itemView.findViewById(R.id.download_progress);
+            download = (ImageView) itemView.findViewById(R.id.download);
 
-            itemView.findViewById(R.id.download).setOnClickListener(new View.OnClickListener() {
+            download.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    if (onItemClickListener!=null)
+                    if (onItemClickListener != null) {
                         onItemClickListener.downloadButtonClicked(appsList.get(getAdapterPosition()).getDownloadLink());
+                        appsList.get(getAdapterPosition()).setDownloading(true);
+                        progressBar.setVisibility(View.VISIBLE);
+                        progressBar.setProgress(0f);
+                        download.setVisibility(View.GONE);
+                    }
 
                 }
             });
@@ -87,7 +106,7 @@ public class PlayRecyclerAdapter extends RecyclerView.Adapter<PlayRecyclerAdapte
         }
     }
 
-    interface OnItemClickListener{
+    interface OnItemClickListener {
 
         void downloadButtonClicked(String url);
     }
