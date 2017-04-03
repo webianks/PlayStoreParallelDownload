@@ -1,6 +1,10 @@
 # PlayStoreParallelDownload
 Download/Update apps parallel in recyclerview like AppStore.
 
+# Download
+
+<a href="https://raw.githubusercontent.com/webianks/PlayStoreParallelDownload/master/apk/app-debug.apk"><img src="https://github.com/webianks/HatkeMessenger/blob/master/screens/download.png" height="74" width="50"></a>
+
 # License
 ```
 MIT License
