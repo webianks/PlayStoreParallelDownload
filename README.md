@@ -1,5 +1,21 @@
 # PlayStoreParallelDownload
-Download/Update apps parallel in recyclerview like AppStore.
+Play store downloads/updates app in sequence because of the performance issues but still there are the cases when you need to download/upload things in parallel like AppStore or WhatsApp.
+
+# Problem Statement
+<ul>
+<li>Download apps in parallel.</li>
+<li>Update their progress in recyclerview item.</li>
+</ul>
+
+# Solution
+
+It can be achieved through using:
+<ul>
+<li><b>Service </b> - For not messing with the UI</li>
+<li><b>AsyncTask </b> - Separate worker thread inside service.</li>
+<li><b>THREAD_POOL_EXECUTOR</b> - Feature of AsyncTask to run multiple asynctasks in different threads.</li>
+<li><b>LocalBroadcastManager </b>- To notify about the progress of download.</li>
+</ul>
 
 # Download
 
