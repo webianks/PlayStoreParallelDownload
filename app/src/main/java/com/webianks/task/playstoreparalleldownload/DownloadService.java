@@ -3,7 +3,6 @@ package com.webianks.task.playstoreparalleldownload;
 import android.app.Service;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -40,10 +39,9 @@ public class DownloadService extends Service {
         }
 
         String[] params = new String[]{url, String.valueOf(position)};
-
         new DownloadingTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     @Nullable
@@ -54,30 +52,25 @@ public class DownloadService extends Service {
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Service done", Toast.LENGTH_SHORT).show();
     }
 
 
     class DownloadingTask extends AsyncTask<String, Long, Void> {
 
         @Override
-        protected void onPreExecute() {
-
-            super.onPreExecute();
-        }
-
-        @Override
         protected Void doInBackground(String... urls) {
 
             Log.d(TAG, "doInBackground: " + urls[0]);
+
             String url = urls[0];
             int position = Integer.valueOf(urls[1]);
 
             int count;
-
             try {
 
-                String root = Environment.getExternalStorageDirectory().toString();
+               // String root = Environment.getExternalStorageDirectory().toString();
+
                 System.out.println("Downloading: " + url);
                 URL urlFormed = new URL(url);
 
@@ -102,29 +95,22 @@ public class DownloadService extends Service {
 
                     // writing data to file
                     //output.write(data, 0, count);
-
                     long download_percentage_new = (100 * total) / lenghtOfFile;
-
                     if (download_percentage_old != download_percentage_new) {
                         download_percentage_old = download_percentage_new;
                         Long values[] = new Long[]{download_percentage_old, Long.valueOf(position)};
                         publishProgress(values);
                     }
-
                 }
-
                 // flushing output
                 //output.flush();
 
                 // closing streams
                 //output.close();
                 input.close();
-
-
             } catch (Exception e) {
                 Log.e("Error: ", e.getMessage());
             }
-
             return null;
         }
 
@@ -145,6 +131,5 @@ public class DownloadService extends Service {
             stopSelf();
         }
     }
-
 
 }
